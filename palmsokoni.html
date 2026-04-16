@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PalmSokoni - Shop Smart, Save Big</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --orange: #FF6A00;
+    --orange-dark: #e05a00;
+    --orange-light: #ff8c33;
+    --orange-bg: #fff5ee;
+    --dark: #1a1a2e;
+    --gray: #666;
+    --light-gray: #f5f5f5;
+    --border: #e0e0e0;
+    --white: #ffffff;
+    --green: #00a651;
+    --red: #e74c3c;
+    --shadow: 0 2px 12px rgba(0,0,0,0.1);
+    --shadow-hover: 0 6px 20px rgba(255,106,0,0.2);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Nunito',sans-serif; background:#f7f7f7; color:#333; }
+
+  /* ===== TOP BAR ===== */
+  .top-bar {
+    background: var(--dark);
+    color: #ccc;
+    font-size: 12px;
+    padding: 5px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .top-bar a { color:#ccc; text-decoration:none; margin-left:12px; }
+  .top-bar a:hover { color:var(--orange); }
+
+  /* ===== STICKY HEADER ===== */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--white);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+
+  /* Main nav row */
+  .header-main {
+    background: var(--orange);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo {
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size:22px;
+    color:#fff;
+    text-decoration:none;
+    white-space:nowrap;
+    letter-spacing:-0.5px;
+  }
+  .logo span { color: var(--dark); }
+
+  /* Category dropdown trigger */
+  .cat-btn {
+    background: rgba(0,0,0,0.2);
+    color:#fff;
+    border:none;
+    padding: 9px 14px;
+    border-radius: 6px;
+    cursor:pointer;
+    font-family:'Nunito',sans-serif;
+    font-weight:700;
+    font-size:13px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    white-space:nowrap;
+    position:relative;
+  }
+  .cat-btn:hover { background: rgba(0,0,0,0.35); }
+  .cat-btn svg { width:16px; height:16px; }
+
+  /* Search bar */
+  .search-wrap {
+    flex:1;
+    display:flex;
+    background:#fff;
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  .search-wrap input {
+    flex:1;
+    border:none;
+    padding:10px 14px;
+    font-size:14px;
+    font-family:'Nunito',sans-serif;
+    outline:none;
+  }
+  .img-search-btn {
+    background: var(--light-gray);
+    border:none;
+    border-right: 1px solid var(--border);
+    padding:0 12px;
+    cursor:pointer;
+    color:var(--gray);
+    font-size:18px;
+    display:flex; align-items:center;
+  }
+  .img-search-btn:hover { background:var(--border); color:var(--orange); }
+  .search-btn {
+    background: var(--dark);
+    color:#fff;
+    border:none;
+    padding: 10px 20px;
+    font-weight:700;
+    font-size:14px;
+    cursor:pointer;
+    font-family:'Nunito',sans-serif;
+    transition: background 0.2s;
+  }
+  .search-btn:hover { background: var(--orange-dark); }
+
+  /* Header icons */
+  .header-icons {
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .icon-btn {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    color:#fff;
+    text-decoration:none;
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:6px;
+    transition: background 0.2s;
+    position:relative;
+    cursor:pointer;
+    border:none;
+    background:transparent;
+    font-family:'Nunito',sans-serif;
+  }
+  .icon-btn:hover { background:rgba(0,0,0,0.2); }
+  .icon-btn svg { width:22px; height:22px; margin-bottom:2px; }
+  .cart-badge {
+    position:absolute;
+    top:2px; right:6px;
+    background:var(--dark);
+    color:#fff;
+    border-radius:50%;
+    width:16px; height:16px;
+    font-size:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700;
+  }
+  .become-seller-btn {
+    background: var(--dark);
+    color:#fff;
+    border:none;
+    padding: 8px 14px;
+    border-radius:6px;
+    font-weight:700;
+    font-size:12px;
+    cursor:pointer;
+    font-family:'Nunito',sans-serif;
+    white-space:nowrap;
+    transition: background 0.2s;
+  }
+  .become-seller-btn:hover { background:#333; }
+
+  /* Second nav row */
+  .header-nav {
+    background: #fff;
+    border-top: 1px solid var(--border);
+    padding: 0 20px;
+    display:flex;
+    align-items:center;
+    gap: 20px;
+    font-size:13px;
+    font-weight:600;
+    color: var(--dark);
+  }
+  .header-nav a { text-decoration:none; color:var(--dark); padding:8px 0; border-bottom:2px solid transparent; }
+  .header-nav a:hover { color:var(--orange); border-bottom-color:var(--orange); }
+
+  /* ===== MEGA CATEGORY DROPDOWN ===== */
+  .cat-mega {
+    position:absolute;
+    top: calc(100% + 2px);
+    left:0;
+    width: 800px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:0 8px 8px 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    display:none;
+    z-index:9999;
+  }
+  .cat-mega.open { display:flex; }
+  .cat-list {
+    width:220px;
+    border-right:1px solid var(--border);
+    padding:8px 0;
+  }
+  .cat-list-item {
+    padding:10px 16px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:13px;
+    font-weight:600;
+    border-left:3px solid transparent;
+    transition: all 0.15s;
+  }
+  .cat-list-item:hover, .cat-list-item.active {
+    background: var(--orange-bg);
+    border-left-color: var(--orange);
+    color: var(--orange);
+  }
+  .cat-list-item .cat-icon { font-size:20px; }
+  .cat-list-item .arrow { margin-left:auto; color:#bbb; font-size:11px; }
+
+  .cat-sub-panel {
+    flex:1;
+    padding:20px;
+    display:none;
+  }
+  .cat-sub-panel.active { display:block; }
+  .cat-sub-panel h4 { font-size:15px; color:var(--orange); margin-bottom:14px; font-family:'Poppins',sans-serif; }
+  .sub-grid {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+  }
+  .sub-item {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:10px 6px;
+    border-radius:8px;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition: all 0.15s;
+    text-decoration:none;
+    color:var(--dark);
+    font-size:12px;
+    text-align:center;
+  }
+  .sub-item:hover { border-color:var(--orange); background:var(--orange-bg); color:var(--orange); }
+  .sub-item-img {
+    width:56px; height:56px;
+    border-radius:8px;
+    object-fit:cover;
+    margin-bottom:6px;
+    background: var(--light-gray);
+    display:flex; align-items:center; justify-content:center;
+    font-size:28px;
+  }
+
+  /* ===== LEFT SIDEBAR CATEGORY (Alibaba style) ===== */
+  .main-layout {
+    display:flex;
+    max-width:1300px;
+    margin:0 auto;
+    padding:16px 16px 0;
+    gap:0;
+  }
+  .left-sidebar {
+    width:200px;
+    flex-shrink:0;
+    background:#fff;
+    border-radius:10px 0 0 10px;
+    border:1px solid var(--border);
+    border-right:none;
+    overflow:visible;
+    position:relative;
+    z-index:10;
+  }
+  .sidebar-title {
+    background: var(--orange);
+    color:#fff;
+    font-weight:700;
+    font-size:13px;
+    padding:10px 14px;
+    border-radius:10px 0 0 0;
+    font-family:'Poppins',sans-serif;
+  }
+  .sidebar-cat-item {
+    padding:9px 14px;
+    font-size:12.5px;
+    font-weight:600;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    border-left:3px solid transparent;
+    position:relative;
+    transition: all 0.15s;
+    border-bottom:1px solid #f5f5f5;
+  }
+  .sidebar-cat-item:hover {
+    background:var(--orange-bg);
+    border-left-color:var(--orange);
+    color:var(--orange);
+  }
+  .sidebar-cat-item .s-icon { font-size:16px; }
+  .sidebar-cat-item .s-arr { margin-left:auto; font-size:11px; color:#bbb; }
+
+  /* Sidebar flyout */
+  .sidebar-flyout {
+    position:absolute;
+    left:100%;
+    top:0;
+    width:560px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:0 10px 10px 0;
+    box-shadow: 4px 4px 20px rgba(0,0,0,0.12);
+    display:none;
+    padding:16px;
+    z-index:100;
+  }
+  .sidebar-cat-item:hover .sidebar-flyout { display:block; }
+  .flyout-title { font-size:14px; font-weight:700; color:var(--orange); margin-bottom:12px; font-family:'Poppins',sans-serif; }
+  .flyout-grid {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+  }
+  .flyout-item {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:8px 4px;
+    border-radius:8px;
+    cursor:pointer;
+    text-align:center;
+    font-size:11.5px;
+    color:#333;
+    border:1px solid transparent;
+    text-decoration:none;
+    transition: all 0.15s;
+  }
+  .flyout-item:hover { border-color:var(--orange); background:var(--orange-bg); color:var(--orange); }
+  .flyout-img {
+    width:52px; height:52px;
+    border-radius:8px;
+    background:var(--light-gray);
+    display:flex; align-items:center; justify-content:center;
+    font-size:26px;
+    margin-bottom:5px;
+  }
+
+  /* ===== HERO + BANNER ===== */
+  .main-content { flex:1; overflow:hidden; }
+
+  /* Hero banner */
+  .hero-banner {
+    background: linear-gradient(135deg, var(--orange) 0%, #ff9a44 50%, var(--dark) 100%);
+    border-radius:0 10px 10px 0;
+    padding:0;
+    overflow:hidden;
+    position:relative;
+    min-height:280px;
+    display:flex;
+    align-items:stretch;
+  }
+  .hero-left {
+    flex:1;
+    padding:30px 30px 20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    z-index:1;
+  }
+  .hero-tag {
+    background:rgba(0,0,0,0.25);
+    color:#fff;
+    padding:4px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    display:inline-block;
+    margin-bottom:12px;
+    width:fit-content;
+    letter-spacing:1px;
+  }
+  .hero-title {
+    font-family:'Poppins',sans-serif;
+    font-size:32px;
+    font-weight:800;
+    color:#fff;
+    line-height:1.1;
+    margin-bottom:10px;
+    text-shadow:0 2px 8px rgba(0,0,0,0.2);
+  }
+  .hero-title span { color:var(--dark); }
+  .hero-sub { color:rgba(255,255,255,0.9); font-size:14px; margin-bottom:20px; }
+  .hero-btn {
+    background:#fff;
+    color:var(--orange);
+    border:none;
+    padding:10px 24px;
+    border-radius:25px;
+    font-weight:800;
+    font-size:14px;
+    cursor:pointer;
+    width:fit-content;
+    font-family:'Nunito',sans-serif;
+    box-shadow:0 4px 14px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .hero-btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,0.25); }
+  .hero-products {
+    display:flex;
+    align-items:flex-end;
+    gap:8px;
+    padding:16px 20px 0;
+  }
+  .hero-prod-card {
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,0.3);
+    border-radius:12px;
+    padding:10px;
+    text-align:center;
+    width:110px;
+    flex-shrink:0;
+    color:#fff;
+  }
+  .hero-prod-img {
+    font-size:40px;
+    margin-bottom:6px;
+    display:block;
+  }
+  .hero-prod-name { font-size:11px; font-weight:700; margin-bottom:3px; }
+  .hero-prod-price { font-size:13px; font-weight:800; color:#ffe58f; }
+
+  /* Flash deals strip */
+  .flash-strip {
+    background: var(--dark);
+    display:flex;
+    align-items:center;
+    gap:0;
+    padding:0;
+    border-radius:10px;
+    margin-top:10px;
+    overflow:hidden;
+  }
+  .flash-label {
+    background:var(--red);
+    color:#fff;
+    padding:10px 16px;
+    font-weight:800;
+    font-size:13px;
+    font-family:'Poppins',sans-serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    white-space:nowrap;
+  }
+  .flash-label .timer { font-size:16px; letter-spacing:2px; font-weight:900; }
+  .flash-items {
+    display:flex;
+    gap:0;
+    flex:1;
+    overflow:hidden;
+  }
+  .flash-item {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:8px 16px;
+    border-right:1px solid rgba(255,255,255,0.1);
+    cursor:pointer;
+    flex-shrink:0;
+    transition: background 0.2s;
+  }
+  .flash-item:hover { background:rgba(255,255,255,0.08); }
+  .flash-item-img { font-size:32px; }
+  .flash-item-info { color:#fff; }
+  .flash-item-name { font-size:12px; font-weight:600; }
+  .flash-item-price { font-size:15px; font-weight:800; color:#ffe58f; }
+  .flash-item-old { font-size:11px; color:#aaa; text-decoration:line-through; }
+  .flash-discount {
+    background:var(--red);
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    padding:2px 6px;
+    border-radius:4px;
+    margin-left:4px;
+  }
+
+  /* ===== CATEGORY CARDS SECTION ===== */
+  .section { max-width:1300px; margin:0 auto; padding:20px 16px 0; }
+  .section-header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
+  }
+  .section-title {
+    font-family:'Poppins',sans-serif;
+    font-size:20px;
+    font-weight:800;
+    color:var(--dark);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .section-title::before {
+    content:'';
+    display:block;
+    width:5px;
+    height:22px;
+    background:var(--orange);
+    border-radius:3px;
+  }
+  .view-all { color:var(--orange); text-decoration:none; font-size:13px; font-weight:700; }
+  .view-all:hover { text-decoration:underline; }
+
+  .cat-cards-grid {
+    display:grid;
+    grid-template-columns:repeat(8,1fr);
+    gap:10px;
+  }
+  .cat-card {
+    background:#fff;
+    border-radius:10px;
+    padding:14px 8px;
+    text-align:center;
+    cursor:pointer;
+    border:1px solid var(--border);
+    transition: all 0.2s;
+    text-decoration:none;
+    color:var(--dark);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+  }
+  .cat-card:hover { border-color:var(--orange); box-shadow:var(--shadow-hover); transform:translateY(-3px); color:var(--orange); }
+  .cat-card-img { font-size:36px; }
+  .cat-card-name { font-size:11.5px; font-weight:700; }
+
+  /* ===== PRODUCT GRID ===== */
+  .product-grid {
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:12px;
+  }
+  .prod-card {
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    border:1px solid var(--border);
+    cursor:pointer;
+    transition: all 0.2s;
+    position:relative;
+  }
+  .prod-card:hover { box-shadow:var(--shadow-hover); transform:translateY(-4px); border-color:var(--orange); }
+  .prod-img-wrap {
+    height:170px;
+    background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:64px;
+    position:relative;
+    overflow:hidden;
+  }
+  .prod-badge {
+    position:absolute;
+    top:8px; left:8px;
+    background:var(--red);
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    padding:2px 8px;
+    border-radius:4px;
+  }
+  .prod-wishlist {
+    position:absolute;
+    top:8px; right:8px;
+    background:rgba(255,255,255,0.9);
+    border:none;
+    border-radius:50%;
+    width:28px; height:28px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    font-size:16px;
+    opacity:0;
+    transition:opacity 0.2s;
+  }
+  .prod-card:hover .prod-wishlist { opacity:1; }
+  .prod-info { padding:10px 12px 12px; }
+  .prod-name { font-size:12.5px; font-weight:600; color:#333; margin-bottom:5px; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .prod-price { font-size:16px; font-weight:800; color:var(--orange); }
+  .prod-price-old { font-size:11px; color:#aaa; text-decoration:line-through; margin-left:4px; }
+  .prod-stars { font-size:11px; color:#f5a623; margin-top:4px; }
+  .prod-stars span { color:#999; }
+  .prod-shipping { font-size:11px; color:var(--green); font-weight:600; margin-top:3px; }
+  .prod-seller { font-size:11px; color:var(--gray); margin-top:2px; }
+  .add-cart-btn {
+    display:block;
+    width:100%;
+    background:var(--orange);
+    color:#fff;
+    border:none;
+    padding:8px;
+    font-weight:700;
+    font-size:12px;
+    cursor:pointer;
+    border-radius:0 0 10px 10px;
+    font-family:'Nunito',sans-serif;
+    margin-top:8px;
+    transition: background 0.2s;
+    opacity:0;
+  }
+  .prod-card:hover .add-cart-btn { opacity:1; }
+  .prod-card:hover .add-cart-btn:hover { background:var(--orange-dark); }
+
+  /* ===== MESSAGING WIDGET ===== */
+  .msg-widget {
+    position:fixed;
+    right:16px;
+    bottom:80px;
+    width:300px;
+    background:#fff;
+    border-radius:14px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.18);
+    z-index:900;
+    overflow:hidden;
+    border:1px solid var(--border);
+    display:block;
+  }
+  .msg-header {
+    background:var(--orange);
+    color:#fff;
+    padding:12px 14px;
+    font-weight:700;
+    font-size:13px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    cursor:pointer;
+  }
+  .msg-header svg { width:18px; height:18px; }
+  .msg-fraud-warn {
+    background:#fff8e1;
+    border-left:4px solid #f5a623;
+    padding:8px 12px;
+    font-size:11.5px;
+    color:#7a5c00;
+    display:flex;
+    gap:6px;
+    align-items:flex-start;
+  }
+  .msg-fraud-warn svg { width:16px; height:16px; flex-shrink:0; margin-top:1px; fill:#f5a623; }
+  .msg-body { padding:12px; }
+  .msg-contacts { list-style:none; }
+  .msg-contact {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:8px 0;
+    border-bottom:1px solid #f5f5f5;
+    cursor:pointer;
+    border-radius:8px;
+    padding:8px;
+    transition:background 0.15s;
+  }
+  .msg-contact:hover { background:var(--orange-bg); }
+  .msg-avatar {
+    width:36px; height:36px;
+    border-radius:50%;
+    background:var(--orange-light);
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px;
+    color:#fff;
+    font-weight:700;
+    flex-shrink:0;
+    position:relative;
+  }
+  .online-dot {
+    position:absolute;
+    bottom:1px; right:1px;
+    width:10px; height:10px;
+    background:var(--green);
+    border-radius:50%;
+    border:2px solid #fff;
+  }
+  .msg-contact-info { flex:1; }
+  .msg-contact-name { font-size:12.5px; font-weight:700; color:var(--dark); }
+  .msg-contact-preview { font-size:11.5px; color:var(--gray); }
+  .msg-badge { background:var(--orange); color:#fff; border-radius:50%; width:18px; height:18px; font-size:10px; display:flex; align-items:center; justify-content:center; font-weight:700; }
+  .msg-input-row {
+    display:flex;
+    gap:6px;
+    margin-top:10px;
+  }
+  .msg-input-row input {
+    flex:1;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:7px 12px;
+    font-size:12px;
+    font-family:'Nunito',sans-serif;
+    outline:none;
+  }
+  .msg-input-row input:focus { border-color:var(--orange); }
+  .msg-send-btn {
+    background:var(--orange);
+    color:#fff;
+    border:none;
+    border-radius:50%;
+    width:32px; height:32px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    flex-shrink:0;
+    transition:background 0.2s;
+  }
+  .msg-send-btn:hover { background:var(--orange-dark); }
+  .msg-toggle-btn {
+    position:fixed;
+    right:16px; bottom:20px;
+    background:var(--orange);
+    color:#fff;
+    border:none;
+    border-radius:50%;
+    width:52px; height:52px;
+    font-size:22px;
+    cursor:pointer;
+    box-shadow:0 4px 16px rgba(255,106,0,0.4);
+    z-index:901;
+    display:flex; align-items:center; justify-content:center;
+    transition: transform 0.2s;
+  }
+  .msg-toggle-btn:hover { transform:scale(1.1); }
+  .msg-notif-dot {
+    position:absolute;
+    top:6px; right:6px;
+    background:var(--red);
+    border-radius:50%;
+    width:14px; height:14px;
+    font-size:9px;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700;
+  }
+
+  /* ===== PROMO BANNERS ===== */
+  .promo-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+  }
+  .promo-card {
+    border-radius:12px;
+    padding:20px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    cursor:pointer;
+    overflow:hidden;
+    position:relative;
+    min-height:100px;
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .promo-card:hover { transform:translateY(-3px); box-shadow:var(--shadow); }
+  .promo-card:nth-child(1) { background:linear-gradient(135deg,#ff6a00,#ff9f44); }
+  .promo-card:nth-child(2) { background:linear-gradient(135deg,#1a1a2e,#16213e); }
+  .promo-card:nth-child(3) { background:linear-gradient(135deg,#00a651,#00c766); }
+  .promo-icon { font-size:48px; }
+  .promo-text h3 { font-size:15px; font-weight:800; color:#fff; font-family:'Poppins',sans-serif; }
+  .promo-text p { font-size:12px; color:rgba(255,255,255,0.8); margin-top:3px; }
+  .promo-text .promo-cta { display:inline-block; background:rgba(255,255,255,0.2); color:#fff; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:700; margin-top:8px; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--dark);
+    color: #ccc;
+    margin-top:40px;
+    padding:40px 0 0;
+    font-size:13px;
+  }
+  .footer-inner {
+    max-width:1300px;
+    margin:0 auto;
+    padding:0 20px;
+  }
+  .footer-logo-section {
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin-bottom:30px;
+  }
+  .footer-logo-text {
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size:28px;
+    color:#fff;
+  }
+  .footer-logo-text span { color:var(--orange); }
+  .footer-tagline { color:#aaa; font-size:13px; }
+  .footer-grid {
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr 1fr;
+    gap:30px;
+    padding-bottom:30px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+  .footer-col h4 {
+    color:#fff;
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:14px;
+    margin-bottom:14px;
+    padding-bottom:6px;
+    border-bottom:2px solid var(--orange);
+    display:inline-block;
+  }
+  .footer-col p { color:#aaa; line-height:1.7; font-size:12.5px; }
+  .footer-col ul { list-style:none; }
+  .footer-col ul li { margin-bottom:8px; }
+  .footer-col ul li a { color:#aaa; text-decoration:none; font-size:12.5px; transition:color 0.2s; }
+  .footer-col ul li a:hover { color:var(--orange); }
+  .footer-social { display:flex; gap:10px; margin-top:14px; }
+  .social-icon {
+    width:36px; height:36px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.1);
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px;
+    cursor:pointer;
+    text-decoration:none;
+    color:#fff;
+    transition:background 0.2s;
+  }
+  .social-icon:hover { background:var(--orange); }
+  .footer-payment {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:14px;
+    flex-wrap:wrap;
+  }
+  .payment-badge {
+    background:rgba(255,255,255,0.1);
+    padding:5px 10px;
+    border-radius:6px;
+    font-size:12px;
+    color:#ddd;
+    font-weight:600;
+  }
+  .footer-bottom {
+    background:rgba(0,0,0,0.3);
+    padding:14px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size:12px;
+    color:#888;
+  }
+  .footer-bottom a { color:#888; text-decoration:none; margin-left:16px; }
+  .footer-bottom a:hover { color:var(--orange); }
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:1100px) {
+    .product-grid { grid-template-columns:repeat(4,1fr); }
+    .cat-cards-grid { grid-template-columns:repeat(6,1fr); }
+    .footer-grid { grid-template-columns:1fr 1fr 1fr; }
+    .cat-mega { width:600px; }
+    .flyout-grid { grid-template-columns:repeat(3,1fr); }
+  }
+  @media(max-width:768px) {
+    .left-sidebar { display:none; }
+    .hero-products { display:none; }
+    .product-grid { grid-template-columns:repeat(2,1fr); }
+    .cat-cards-grid { grid-template-columns:repeat(4,1fr); }
+    .promo-grid { grid-template-columns:1fr; }
+    .footer-grid { grid-template-columns:1fr 1fr; }
+    .main-layout { padding:10px; }
+    .hero-title { font-size:22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div>🇹🇿 Tanzania's #1 Online Marketplace — palmsokoni.com</div>
+  <div>
+    <a href="#">TZS / English</a>
+    <a href="#">Download App</a>
+    <a href="#">Help Center</a>
+    <a href="#">Track Order</a>
+  </div>
+</div>
+
+<!-- STICKY HEADER -->
+<header class="header">
+  <div class="header-main">
+    <!-- Logo -->
+    <a href="#" class="logo">Palm<span>Sokoni</span></a>
+
+    <!-- All Categories trigger -->
+    <div style="position:relative;">
+      <button class="cat-btn" id="catBtn" onclick="toggleMegaCat()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        All Categories
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:12px;height:12px;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+
+      <!-- MEGA DROPDOWN -->
+      <div class="cat-mega" id="catMega">
+        <div class="cat-list" id="catList">
+          <!-- populated by JS -->
+        </div>
+        <div id="catSubPanels" style="flex:1;">
+          <!-- populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-wrap">
+      <button class="img-search-btn" title="Search by image" onclick="alert('Image search: Upload a product photo to find similar items on PalmSokoni')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span style="font-size:11px;margin-left:4px;vertical-align:middle;">📷</span>
+      </button>
+      <input type="text" id="searchInput" placeholder="Search products, brands, sellers…" />
+      <button class="search-btn" onclick="doSearch()">Search</button>
+    </div>
+
+    <!-- Icons -->
+    <div class="header-icons">
+      <a class="icon-btn" href="#" title="Messages" onclick="toggleMsg(event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Messages
+      </a>
+      <a class="icon-btn" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Wishlist
+      </a>
+      <a class="icon-btn" href="#" style="position:relative;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        Cart
+        <span class="cart-badge">3</span>
+      </a>
+      <a class="icon-btn" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Account
+      </a>
+      <button class="become-seller-btn" onclick="alert('Register as a seller on PalmSokoni! Start selling your products to thousands of customers across Tanzania.')">
+        🏪 Become a Seller
+      </button>
+    </div>
+  </div>
+
+  <!-- NAV ROW -->
+  <nav class="header-nav">
+    <a href="#">🏠 Home</a>
+    <a href="#">🔥 Flash Deals</a>
+    <a href="#">🆕 New Arrivals</a>
+    <a href="#">📱 Electronics</a>
+    <a href="#">👗 Fashion</a>
+    <a href="#">🏠 Home & Living</a>
+    <a href="#">🌿 Health & Beauty</a>
+    <a href="#">🚗 Automotive</a>
+    <a href="#" style="color:var(--red);font-weight:800;">🎁 Special Offers</a>
+  </nav>
+</header>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+  <!-- LEFT SIDEBAR (Alibaba-style with flyout) -->
+  <aside class="left-sidebar">
+    <div class="sidebar-title">📂 All Categories</div>
+    <div id="sidebarCats">
+      <!-- populated by JS -->
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <!-- HERO BANNER -->
+    <div class="hero-banner">
+      <div class="hero-left">
+        <span class="hero-tag">🇹🇿 TANZANIA'S MARKETPLACE</span>
+        <h1 class="hero-title">Shop Smart,<br><span>Save Big</span><br>on PalmSokoni</h1>
+        <p class="hero-sub">Thousands of products from verified sellers across Tanzania and beyond</p>
+        <button class="hero-btn" onclick="alert('Browse all deals on PalmSokoni!')">🛒 Shop Now — Best Deals</button>
+      </div>
+      <div class="hero-products">
+        <div class="hero-prod-card">
+          <span class="hero-prod-img">📱</span>
+          <div class="hero-prod-name">Smartphones</div>
+          <div class="hero-prod-price">From TSh 45,000</div>
+        </div>
+        <div class="hero-prod-card">
+          <span class="hero-prod-img">👟</span>
+          <div class="hero-prod-name">Sneakers</div>
+          <div class="hero-prod-price">From TSh 25,000</div>
+        </div>
+        <div class="hero-prod-card">
+          <span class="hero-prod-img">🎧</span>
+          <div class="hero-prod-name">Headphones</div>
+          <div class="hero-prod-price">From TSh 18,000</div>
+        </div>
+        <div class="hero-prod-card" style="align-self:flex-end; margin-bottom:-10px;">
+          <span class="hero-prod-img">💄</span>
+          <div class="hero-prod-name">Beauty</div>
+          <div class="hero-prod-price">From TSh 5,000</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLASH DEALS -->
+    <div class="flash-strip">
+      <div class="flash-label">
+        ⚡ FLASH<br>DEALS
+        <span class="timer" id="flashTimer">02:47:33</span>
+      </div>
+      <div class="flash-items">
+        <div class="flash-item">
+          <span class="flash-item-img">📱</span>
+          <div class="flash-item-info">
+            <div class="flash-item-name">Samsung A15</div>
+            <div><span class="flash-item-price">TSh 320,000</span><span class="flash-item-old">TSh 480,000</span><span class="flash-discount">-33%</span></div>
+          </div>
+        </div>
+        <div class="flash-item">
+          <span class="flash-item-img">🎧</span>
+          <div class="flash-item-info">
+            <div class="flash-item-name">BT Earbuds</div>
+            <div><span class="flash-item-price">TSh 28,000</span><span class="flash-item-old">TSh 55,000</span><span class="flash-discount">-49%</span></div>
+          </div>
+        </div>
+        <div class="flash-item">
+          <span class="flash-item-img">👗</span>
+          <div class="flash-item-info">
+            <div class="flash-item-name">Summer Dress</div>
+            <div><span class="flash-item-price">TSh 18,000</span><span class="flash-item-old">TSh 35,000</span><span class="flash-discount">-49%</span></div>
+          </div>
+        </div>
+        <div class="flash-item">
+          <span class="flash-item-img">⌚</span>
+          <div class="flash-item-info">
+            <div class="flash-item-name">Smart Watch</div>
+            <div><span class="flash-item-price">TSh 55,000</span><span class="flash-item-old">TSh 95,000</span><span class="flash-discount">-42%</span></div>
+          </div>
+        </div>
+        <div class="flash-item">
+          <span class="flash-item-img">🏋️</span>
+          <div class="flash-item-info">
+            <div class="flash-item-name">Gym Bag</div>
+            <div><span class="flash-item-price">TSh 22,000</span><span class="flash-item-old">TSh 40,000</span><span class="flash-discount">-45%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROMO BANNERS -->
+<div class="section">
+  <div class="promo-grid">
+    <div class="promo-card">
+      <span class="promo-icon">🚚</span>
+      <div class="promo-text">
+        <h3>Free Delivery</h3>
+        <p>On orders over TSh 50,000 within Dar es Salaam</p>
+        <span class="promo-cta">Learn More →</span>
+      </div>
+    </div>
+    <div class="promo-card">
+      <span class="promo-icon">🛡️</span>
+      <div class="promo-text">
+        <h3>Buyer Protection</h3>
+        <p>100% safe payments & money-back guarantee</p>
+        <span class="promo-cta">How it Works →</span>
+      </div>
+    </div>
+    <div class="promo-card">
+      <span class="promo-icon">🏪</span>
+      <div class="promo-text">
+        <h3>Sell on PalmSokoni</h3>
+        <p>Join 5,000+ sellers. Register free & start selling today</p>
+        <span class="promo-cta">Register Now →</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY CARDS -->
+<div class="section">
+  <div class="section-header">
+    <h2 class="section-title">Shop by Category</h2>
+    <a href="#" class="view-all">View All →</a>
+  </div>
+  <div class="cat-cards-grid" id="catCardsGrid">
+    <!-- populated by JS -->
+  </div>
+</div>
+
+<!-- FEATURED PRODUCTS -->
+<div class="section">
+  <div class="section-header">
+    <h2 class="section-title">Featured Products</h2>
+    <a href="#" class="view-all">See All →</a>
+  </div>
+  <div class="product-grid" id="productGrid">
+    <!-- populated by JS -->
+  </div>
+</div>
+
+<!-- NEW ARRIVALS -->
+<div class="section" style="margin-bottom:30px;">
+  <div class="section-header">
+    <h2 class="section-title">New Arrivals</h2>
+    <a href="#" class="view-all">See All →</a>
+  </div>
+  <div class="product-grid" id="newArrivalsGrid">
+  </div>
+</div>
+
+<!-- MESSAGING WIDGET -->
+<div class="msg-widget" id="msgWidget">
+  <div class="msg-header" onclick="toggleMsg(event)">
+    <span>
+      <svg style="display:inline;vertical-align:middle;margin-right:6px;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Message Sellers
+    </span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+  </div>
+  <div class="msg-fraud-warn">
+    <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2z"/><line x1="12" y1="9" x2="12" y2="13" stroke="#7a5c00" stroke-width="2"/><circle cx="12" cy="17" r="1" fill="#7a5c00"/></svg>
+    <span><strong>⚠️ Fraud Warning:</strong> Never pay outside PalmSokoni. All payments must go through our secure checkout. Report suspicious sellers immediately.</span>
+  </div>
+  <div class="msg-body">
+    <ul class="msg-contacts">
+      <li class="msg-contact">
+        <div class="msg-avatar">T<span class="online-dot"></span></div>
+        <div class="msg-contact-info">
+          <div class="msg-contact-name">TechHub Store</div>
+          <div class="msg-contact-preview">Is the phone still available?</div>
+        </div>
+        <span class="msg-badge">2</span>
+      </li>
+      <li class="msg-contact">
+        <div class="msg-avatar" style="background:#00a651;">F</div>
+        <div class="msg-contact-info">
+          <div class="msg-contact-name">Fashion Palace</div>
+          <div class="msg-contact-preview">Your order is on the way!</div>
+        </div>
+      </li>
+      <li class="msg-contact">
+        <div class="msg-avatar" style="background:var(--dark);">H</div>
+        <div class="msg-contact-info">
+          <div class="msg-contact-name">HomeGoods TZ</div>
+          <div class="msg-contact-preview">We have that item in stock ✓</div>
+        </div>
+        <span class="msg-badge">1</span>
+      </li>
+    </ul>
+    <div class="msg-input-row">
+      <input type="text" placeholder="Type a message…" />
+      <button class="msg-send-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<button class="msg-toggle-btn" onclick="toggleMsg(event)" title="Messages" style="position:fixed;right:16px;bottom:20px;z-index:901;">
+  💬
+  <span class="msg-notif-dot">3</span>
+</button>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo-section">
+      <div>
+        <div class="footer-logo-text">Palm<span>Sokoni</span></div>
+        <div class="footer-tagline">Tanzania's Trusted Online Marketplace</div>
+        <div class="footer-tagline" style="color:var(--orange);font-weight:700;margin-top:4px;">🌴 palmsokoni.com</div>
+      </div>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>About PalmSokoni</h4>
+        <p>PalmSokoni connects buyers and sellers across Tanzania and East Africa. We offer a safe, convenient platform for trading everything from electronics to fashion, home goods and more.</p>
+        <div class="footer-social">
+          <a class="social-icon" href="#" title="Facebook">f</a>
+          <a class="social-icon" href="#" title="Instagram">ig</a>
+          <a class="social-icon" href="#" title="Twitter">𝕏</a>
+          <a class="social-icon" href="#" title="WhatsApp">wa</a>
+          <a class="social-icon" href="#" title="YouTube">▶</a>
+        </div>
+        <div class="footer-payment" style="margin-top:16px;">
+          <span style="color:#aaa;font-size:12px;font-weight:700;">Pay with:</span>
+          <span class="payment-badge">M-Pesa</span>
+          <span class="payment-badge">Tigo Pesa</span>
+          <span class="payment-badge">Airtel Money</span>
+          <span class="payment-badge">Visa/MC</span>
+          <span class="payment-badge">Cash</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>For Buyers</h4>
+        <ul>
+          <li><a href="#">How to Order</a></li>
+          <li><a href="#">Track My Order</a></li>
+          <li><a href="#">Payment Methods</a></li>
+          <li><a href="#">Returns & Refunds</a></li>
+          <li><a href="#">Buyer Protection</a></li>
+          <li><a href="#">Report Fraud</a></li>
+          <li><a href="#">FAQs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For Sellers</h4>
+        <ul>
+          <li><a href="#">Become a Seller</a></li>
+          <li><a href="#">Seller Registration</a></li>
+          <li><a href="#">Seller Dashboard</a></li>
+          <li><a href="#">Upload Products</a></li>
+          <li><a href="#">Seller Guidelines</a></li>
+          <li><a href="#">Shipping Guide</a></li>
+          <li><a href="#">Seller Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Top Categories</h4>
+        <ul>
+          <li><a href="#">📱 Electronics</a></li>
+          <li><a href="#">👗 Fashion & Apparel</a></li>
+          <li><a href="#">🏠 Home & Living</a></li>
+          <li><a href="#">🌿 Health & Beauty</a></li>
+          <li><a href="#">🚗 Automotive</a></li>
+          <li><a href="#">🍎 Food & Groceries</a></li>
+          <li><a href="#">⚽ Sports & Outdoors</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <ul>
+          <li><a href="#">📧 support@palmsokoni.com</a></li>
+          <li><a href="#">📞 +255 XXX XXX XXX</a></li>
+          <li><a href="#">💬 Live Chat</a></li>
+          <li><a href="#">📍 Dar es Salaam, TZ</a></li>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 PalmSokoni. All rights reserved. palmsokoni.com</span>
+    <div>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Cookie Policy</a>
+      <a href="#">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ========== DATA ==========
+const categories = [
+  { icon:'📱', name:'Electronics', subs:[
+    {icon:'📱',name:'Smartphones'},{icon:'💻',name:'Laptops'},{icon:'🎧',name:'Audio'},{icon:'📷',name:'Cameras'},
+    {icon:'⌚',name:'Smartwatches'},{icon:'🖥️',name:'Monitors'},{icon:'🎮',name:'Gaming'},{icon:'🔋',name:'Power Banks'}
+  ]},
+  { icon:'👗', name:'Fashion', subs:[
+    {icon:'👗',name:"Women's Wear"},{icon:'👔',name:"Men's Wear"},{icon:'👟',name:'Shoes'},{icon:'👜',name:'Handbags'},
+    {icon:'🧣',name:'Accessories'},{icon:'💍',name:'Jewelry'},{icon:'🧢',name:'Hats & Caps'},{icon:'🩱',name:'Swimwear'}
+  ]},
+  { icon:'🏠', name:'Home & Living', subs:[
+    {icon:'🛋️',name:'Furniture'},{icon:'🍳',name:'Kitchen'},{icon:'🛏️',name:'Bedding'},{icon:'💡',name:'Lighting'},
+    {icon:'🧹',name:'Cleaning'},{icon:'🌱',name:'Garden'},{icon:'🖼️',name:'Decor'},{icon:'🚿',name:'Bathroom'}
+  ]},
+  { icon:'🌿', name:'Health & Beauty', subs:[
+    {icon:'💄',name:'Makeup'},{icon:'🧴',name:'Skincare'},{icon:'💊',name:'Vitamins'},{icon:'🌸',name:'Perfumes'},
+    {icon:'💇',name:'Hair Care'},{icon:'🧘',name:'Wellness'},{icon:'🦷',name:'Dental'},{icon:'👁️',name:'Eye Care'}
+  ]},
+  { icon:'🚗', name:'Automotive', subs:[
+    {icon:'🔧',name:'Car Parts'},{icon:'🛞',name:'Tyres'},{icon:'🧰',name:'Tools'},{icon:'🚗',name:'Accessories'},
+    {icon:'🔦',name:'Lighting'},{icon:'🛢️',name:'Oils'},{icon:'🏍️',name:'Motorcycles'},{icon:'🚌',name:'Bus Parts'}
+  ]},
+  { icon:'🍎', name:'Food & Grocery', subs:[
+    {icon:'🍎',name:'Fresh Produce'},{icon:'🥩',name:'Meat & Fish'},{icon:'🧀',name:'Dairy'},{icon:'🌾',name:'Grains'},
+    {icon:'🥤',name:'Beverages'},{icon:'🍫',name:'Snacks'},{icon:'🧴',name:'Cleaning'},{icon:'🍼',name:'Baby Food'}
+  ]},
+  { icon:'⚽', name:'Sports', subs:[
+    {icon:'⚽',name:'Football'},{icon:'🏋️',name:'Fitness'},{icon:'🏊',name:'Swimming'},{icon:'🎾',name:'Tennis'},
+    {icon:'🚴',name:'Cycling'},{icon:'🏕️',name:'Outdoor'},{icon:'🥊',name:'Boxing'},{icon:'🏃',name:'Running'}
+  ]},
+  { icon:'📚', name:'Books & School', subs:[
+    {icon:'📚',name:'Textbooks'},{icon:'📖',name:'Fiction'},{icon:'✏️',name:'Stationery'},{icon:'🎒',name:'School Bags'},
+    {icon:'📐',name:'Art Supplies'},{icon:'🔬',name:'Science Kits'},{icon:'🖊️',name:'Pens & Pencils'},{icon:'📒',name:'Notebooks'}
+  ]},
+  { icon:'👶', name:'Baby & Kids', subs:[
+    {icon:'🍼',name:'Baby Food'},{icon:'🧸',name:'Toys'},{icon:'👶',name:"Baby Wear"},{icon:'🎠',name:'Play Sets'},
+    {icon:'🚼',name:'Strollers'},{icon:'🛁',name:'Bath Time'},{icon:'🏫',name:'School Needs'},{icon:'🎨',name:'Crafts'}
+  ]},
+];
+
+const products = [
+  { icon:'📱', name:'iPhone 14 Pro Max – 256GB Space Black', price:'TSh 1,850,000', old:'TSh 2,200,000', disc:'-16%', stars:'⭐⭐⭐⭐⭐', reviews:'2.4k', ship:'Free Delivery', seller:'TechHub TZ' },
+  { icon:'👗', name:'Ankara Print Maxi Dress – Women\'s S-XL', price:'TSh 32,000', old:'TSh 55,000', disc:'-42%', stars:'⭐⭐⭐⭐', reviews:'847', ship:'Free Delivery', seller:'Fashion Palace' },
+  { icon:'🎧', name:'Sony WH-1000XM5 Wireless Headphones', price:'TSh 285,000', old:'TSh 380,000', disc:'-25%', stars:'⭐⭐⭐⭐⭐', reviews:'1.2k', ship:'Free Delivery', seller:'Sound World' },
+  { icon:'🛋️', name:'Modern Sofa Set – 3+2 Seater Dark Grey', price:'TSh 450,000', old:'TSh 620,000', disc:'-27%', stars:'⭐⭐⭐⭐', reviews:'312', ship:'Delivery TSh 5,000', seller:'HomeGoods TZ' },
+  { icon:'👟', name:'Nike Air Force 1 Sneakers – All Sizes', price:'TSh 75,000', old:'TSh 120,000', disc:'-38%', stars:'⭐⭐⭐⭐⭐', reviews:'3.1k', ship:'Free Delivery', seller:'Kicks & More' },
+  { icon:'💄', name:'MAC Studio Fix Foundation – 30ml Full Coverage', price:'TSh 48,000', old:'TSh 72,000', disc:'-33%', stars:'⭐⭐⭐⭐', reviews:'654', ship:'Free Delivery', seller:'Beauty World TZ' },
+  { icon:'⌚', name:'Samsung Galaxy Watch 6 Classic 47mm', price:'TSh 390,000', old:'TSh 520,000', disc:'-25%', stars:'⭐⭐⭐⭐⭐', reviews:'891', ship:'Free Delivery', seller:'TechHub TZ' },
+  { icon:'🍳', name:'Non-Stick Cookware Set – 5 Piece Kitchen Set', price:'TSh 65,000', old:'TSh 98,000', disc:'-34%', stars:'⭐⭐⭐⭐', reviews:'428', ship:'Delivery TSh 3,000', seller:'HomeGoods TZ' },
+  { icon:'🏋️', name:'Adjustable Dumbbell Set 5–52.5kg', price:'TSh 180,000', old:'TSh 250,000', disc:'-28%', stars:'⭐⭐⭐⭐⭐', reviews:'199', ship:'Delivery TSh 10,000', seller:'FitStore TZ' },
+  { icon:'💻', name:'Lenovo IdeaPad 3 – Intel i5, 8GB RAM, 512GB SSD', price:'TSh 850,000', old:'TSh 1,100,000', disc:'-23%', stars:'⭐⭐⭐⭐', reviews:'567', ship:'Free Delivery', seller:'TechHub TZ' },
+];
+
+const newArrivals = [
+  { icon:'📸', name:'DJI Osmo Pocket 3 Camera Stabilizer', price:'TSh 420,000', old:null, disc:'NEW', stars:'⭐⭐⭐⭐⭐', reviews:'45', ship:'Free Delivery', seller:'TechGadgets' },
+  { icon:'🧴', name:'CeraVe Moisturising Cream 340g', price:'TSh 35,000', old:null, disc:'NEW', stars:'⭐⭐⭐⭐⭐', reviews:'89', ship:'Free Delivery', seller:'Beauty World' },
+  { icon:'🚴', name:'Mountain Bike 26" – Shimano 21-Speed', price:'TSh 320,000', old:null, disc:'NEW', stars:'⭐⭐⭐⭐', reviews:'23', ship:'Delivery TSh 15,000', seller:'Sports Zone' },
+  { icon:'🎮', name:'PS5 DualSense Controller – Midnight Black', price:'TSh 120,000', old:null, disc:'NEW', stars:'⭐⭐⭐⭐⭐', reviews:'67', ship:'Free Delivery', seller:'GameStore TZ' },
+  { icon:'🧸', name:'Educational Robot Toy Kit for Kids Age 6+', price:'TSh 55,000', old:null, disc:'NEW', stars:'⭐⭐⭐⭐', reviews:'31', ship:'Free Delivery', seller:'Kids Corner' },
+];
+
+// ========== BUILD CATEGORY MEGA DROPDOWN ==========
+function buildMegaCat() {
+  const list = document.getElementById('catList');
+  const panels = document.getElementById('catSubPanels');
+  categories.forEach((cat, i) => {
+    const item = document.createElement('div');
+    item.className = 'cat-list-item' + (i===0?' active':'');
+    item.dataset.idx = i;
+    item.innerHTML = `<span class="cat-icon">${cat.icon}</span>${cat.name}<span class="arrow">›</span>`;
+    item.addEventListener('mouseenter', () => {
+      document.querySelectorAll('.cat-list-item').forEach(el=>el.classList.remove('active'));
+      document.querySelectorAll('.cat-sub-panel').forEach(el=>el.classList.remove('active'));
+      item.classList.add('active');
+      document.getElementById('subpanel-'+i).classList.add('active');
+    });
+    list.appendChild(item);
+
+    const panel = document.createElement('div');
+    panel.className = 'cat-sub-panel' + (i===0?' active':'');
+    panel.id = 'subpanel-'+i;
+    panel.innerHTML = `<h4>${cat.icon} ${cat.name}</h4><div class="sub-grid">` +
+      cat.subs.map(s=>`<a class="sub-item" href="#"><div class="sub-item-img">${s.icon}</div>${s.name}</a>`).join('') +
+    `</div>`;
+    panels.appendChild(panel);
+  });
+}
+
+// ========== BUILD SIDEBAR ==========
+function buildSidebar() {
+  const container = document.getElementById('sidebarCats');
+  categories.forEach((cat, i) => {
+    const item = document.createElement('div');
+    item.className = 'sidebar-cat-item';
+    item.innerHTML = `
+      <span class="s-icon">${cat.icon}</span>
+      <span>${cat.name}</span>
+      <span class="s-arr">›</span>
+      <div class="sidebar-flyout">
+        <div class="flyout-title">${cat.icon} ${cat.name}</div>
+        <div class="flyout-grid">
+          ${cat.subs.map(s=>`<a class="flyout-item" href="#"><div class="flyout-img">${s.icon}</div>${s.name}</a>`).join('')}
+        </div>
+      </div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+// ========== BUILD CATEGORY CARDS ==========
+function buildCatCards() {
+  const grid = document.getElementById('catCardsGrid');
+  categories.forEach(cat => {
+    const card = document.createElement('a');
+    card.className = 'cat-card';
+    card.href = '#';
+    card.innerHTML = `<span class="cat-card-img">${cat.icon}</span><span class="cat-card-name">${cat.name}</span>`;
+    grid.appendChild(card);
+  });
+}
+
+// ========== BUILD PRODUCTS ==========
+function buildProducts(data, gridId) {
+  const grid = document.getElementById(gridId);
+  data.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'prod-card';
+    card.innerHTML = `
+      <div class="prod-img-wrap">
+        <span style="font-size:64px;">${p.icon}</span>
+        <span class="prod-badge">${p.disc}</span>
+        <button class="prod-wishlist">❤️</button>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">${p.name}</div>
+        <div>
+          <span class="prod-price">${p.price}</span>
+          ${p.old ? `<span class="prod-price-old">${p.old}</span>` : ''}
+        </div>
+        <div class="prod-stars">${p.stars} <span>(${p.reviews})</span></div>
+        <div class="prod-shipping">🚚 ${p.ship}</div>
+        <div class="prod-seller">🏪 ${p.seller}</div>
+      </div>
+      <button class="add-cart-btn" onclick="event.stopPropagation();alert('Added to cart!')">🛒 Add to Cart</button>
+    `;
+    card.addEventListener('click', () => alert(`Viewing: ${p.name}\nPrice: ${p.price}`));
+    grid.appendChild(card);
+  });
+}
+
+// ========== MEGA CAT TOGGLE ==========
+function toggleMegaCat() {
+  const mega = document.getElementById('catMega');
+  mega.classList.toggle('open');
+}
+document.addEventListener('click', (e) => {
+  const btn = document.getElementById('catBtn');
+  const mega = document.getElementById('catMega');
+  if (!btn.contains(e.target) && !mega.contains(e.target)) {
+    mega.classList.remove('open');
+  }
+});
+
+// ========== MSG TOGGLE ==========
+function toggleMsg(e) {
+  if(e) e.preventDefault();
+  const w = document.getElementById('msgWidget');
+  w.style.display = w.style.display === 'none' ? 'block' : 'none';
+}
+
+// ========== SEARCH ==========
+function doSearch() {
+  const q = document.getElementById('searchInput').value.trim();
+  if(q) alert(`Searching PalmSokoni for: "${q}"\n\nIn the full website, this would show live results!`);
+}
+document.getElementById('searchInput').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
+
+// ========== FLASH TIMER ==========
+function startTimer() {
+  let total = 2*3600 + 47*60 + 33;
+  setInterval(() => {
+    total--;
+    if(total<0) total=0;
+    const h = String(Math.floor(total/3600)).padStart(2,'0');
+    const m = String(Math.floor((total%3600)/60)).padStart(2,'0');
+    const s = String(total%60).padStart(2,'0');
+    document.getElementById('flashTimer').textContent = `${h}:${m}:${s}`;
+  }, 1000);
+}
+
+// ========== INIT ==========
+buildMegaCat();
+buildSidebar();
+buildCatCards();
+buildProducts(products, 'productGrid');
+buildProducts(newArrivals, 'newArrivalsGrid');
+startTimer();
+</script>
+</body>
+</html>
